@@ -1,18 +1,18 @@
 import React from "react";
-import { Route, route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 
 import Welcome from "./components/Welcome/Welcome";
 import Clock from "./components/Clock/Clock";
 import Contact from "./components/Contact/Contact";
 import Navigation from "./components/navigation/Navigation";
+import FourFour from "./components/FourFour/FourFour";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Navigation />
-
       <Switch>
         <Route
           exact
@@ -22,6 +22,7 @@ function App() {
         <Route path="/Welcome/:name" component={Welcome} />
         <Route path="/Clock" component={Clock} />
         <Route path="/Contact" component={Contact} />
+        <Route path="/" component={FourFour} />
       </Switch>
     </div>
   );
