@@ -25,16 +25,16 @@ class Jeopardy extends Component {
   render() {
     console.log(this.state.data);
     if (!this.state.data.id) {
-      return <div>Loading</div>;
+      return <div></div>;
     }
     return (
       <div>
-        <form>
+        <form className="answerSubmission">
           <label>
             What's Your Answer:
             <input type="text" name="Answer" />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Am I Right?" />
         </form>
         <div className="Score">Player Score: {this.state.score}</div>
         <div className="questionArea">
