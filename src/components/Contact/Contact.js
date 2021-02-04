@@ -33,7 +33,6 @@ class Contact extends Component {
     });
   };
   render() {
-    //show the thank you message if the form has been submitted
     if (this.state.submitted) {
       return (
         <div>
