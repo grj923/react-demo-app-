@@ -7,6 +7,7 @@ import Clock from "./components/Clock/Clock";
 import Contact from "./components/Contact/Contact";
 import Navigation from "./components/navigation/Navigation";
 import FourFour from "./components/FourFour/FourFour";
+import Jeopardy from "./components/jeopardy/Jeopardy";
 import "./App.css";
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path="/Welcome/:name" component={Welcome} />
         <Route path="/Clock" component={Clock} />
         <Route path="/Contact" component={Contact} />
-        <Route path="/" component={FourFour} />
+        <Route path="/jeopardy" component={Jeopardy} />
+        <Route component={FourFour} />
       </Switch>
     </div>
   );

@@ -14,6 +14,9 @@ function Navigation(props) {
         <li>
           <Link to="Contact">Contact</Link>
         </li>
+        <li>
+          <Link to="Jeopardy">Jeopardy</Link>
+        </li>
       </ul>
     </div>
   );
