@@ -12,7 +12,7 @@ class Contact extends Component {
     };
   }
   handleChange = (event) => {
-    let formData = this.state.formData;
+    let formData = { ...this.state.formData };
     formData[event.target.name] = event.target.value;
     this.setState({ formData });
   };

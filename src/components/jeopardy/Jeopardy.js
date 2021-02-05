@@ -8,9 +8,43 @@ class Jeopardy extends Component {
     this.state = {
       data: {},
       score: 0,
-      userAnswer: " ",
+      formData: {
+        answer: "",
+      },
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange = (event) => {
+    const formData = { ...this.state.formData };
+    formData[event.target.name] = event.target.value;
+    this.setState({ formData });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("handlesubmit");
+    if (this.state.formData.answer === this.state.data.answer) {
+      console.log("match");
+      this.setState((state, props) => ({
+        score: state.score + state.data.value,
+        formData: {
+          answer: "",
+        },
+      }));
+    } else {
+      console.log("nomatch");
+      this.setState((state, props) => ({
+        score: state.score - state.data.value,
+        formData: {
+          answer: "",
+        },
+      }));
+    }
+    this.getNewQuestion();
+  };
+
   getNewQuestion() {
     return this.client.getQuestion().then((result) => {
       this.setState({
@@ -23,27 +57,37 @@ class Jeopardy extends Component {
     this.getNewQuestion();
   }
 
-  updateScore(event) {}
-
   render() {
     console.log(this.state.data);
-    console.log(this.state.userAnswer);
     if (!this.state.data.id) {
-      return <div></div>;
+      return <div>Loading</div>;
     }
     return (
       <div>
-        <form className="answerSubmission" onSubmit={this.updateScore}>
-          <label>What's Your Answer:</label>
-          <input type="text" name="userAnswer" />
-          <input type="submit" value={this.state.userAnswer} />
-        </form>
-        <div className="Score">Player Score: {this.state.score}</div>
         <div className="questionArea">
-          <p>Question: {this.state.data.question}</p>
-          <p>Category: {this.state.data.category.title}</p>
-          <p>Point Value: {this.state.data.value}</p>
+          <br />
+          <h4>Question:</h4>
+          <p>{this.state.data.question}</p>
+          <h4>Category:</h4>
+          <p>{this.state.data.category.title}</p>
+          <h4>Point Value:</h4>
+          <p>{this.state.data.value}</p>
         </div>
+        <div className="Score">
+          <h5>Player Score:</h5>
+          <p>{this.state.score}</p>
+        </div>
+        <form onSubmit={this.handleSubmit}>
+          <label>What's Your Answer?</label>
+          <br />
+          <input
+            type="text"
+            name="answer"
+            onChange={this.handleChange}
+            value={this.state.formData.answer}
+          />
+          <button>Submit</button>
+        </form>
       </div>
     );
   }
